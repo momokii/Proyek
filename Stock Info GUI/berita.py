@@ -2,7 +2,7 @@ import data_saham as ds
 import requests
 import math
 api_endpoint_news = "https://newsapi.org/v2/everything"
-api_keys_news = "f77fe8db23134947aab43cffd6a92f31"
+api_keys_news = "YOUR_API_KEYS"
 
 
 class Berita:

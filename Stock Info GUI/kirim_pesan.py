@@ -1,7 +1,7 @@
 from twilio.rest import Client
 
-twilio_sid = 'AC7df3c60a20e43f481190377c367b9913'
-twilio_auth = '9ae6d6a3f0f79d782bce9ebe8424ab30'
+twilio_sid = 'YOUR_TWILLIO_ID'
+twilio_auth = 'YOUR_TWILLIO_AUTH'
 twilio_num = '+19853799161'
 
 class Kirim_Pesan:
@@ -10,6 +10,6 @@ class Kirim_Pesan:
         self.message = self.client.messages.create(
                     body= berita,
                     from_= twilio_num,
-                    to= "+6281227041244"
+                    to= "NUM_DESTINATION"
                 )
         print(self.message.status)

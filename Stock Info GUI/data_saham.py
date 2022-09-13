@@ -7,7 +7,7 @@ kemarin = (hari_sekarang - datetime.timedelta(days = 1)).date()
 kemarin_lusa = (hari_sekarang - datetime.timedelta(days = 2)).date()
 
 api_endpoint_stock = 'https://www.alphavantage.co/query'
-api_keys_stock = '8934MNGJYA949H72'
+api_keys_stock = 'YOUR_API_KEYS'
 
 
 class Saham:
