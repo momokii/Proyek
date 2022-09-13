@@ -1,4 +1,4 @@
-## Halo - Halo !
+## Halo!
 
 Selamat datang di Repository saya, kemungkinan besar repository yang saya bagikan ini hanya berisi proyek proyek yang saya lakukan secara mandiri
 
