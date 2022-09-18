@@ -1,12 +1,10 @@
 import smtplib
 from mailjet_rest import Client
 from konversi_rupiah import KonversiRupiah
-MAIJET_API_KEY = 'fb3bf8be913d33916f010f98a2d19df6'
-MAIJET_SECRET_KEY = '16dfdcd00644e87cbdab87da54c55ee0'
+MAIJET_API_KEY = 'MAILJET_API_KEY'
+MAIJET_SECRET_KEY = 'MAILJET_SECRET'
 # https://github.com/mailjet/mailjet-apiv3-python
 kr = KonversiRupiah()
-USERNAME = 'artshutter922@gmail.com'
-PASSWORD = 'HBP2FtVhzMdA8nwm'
 
 class KirimEmail:
     def __init__(self, harga_asli_usd, data_input_prediksi):
@@ -26,15 +24,6 @@ class KirimEmail:
                      f"Tanggal {kr.get_day_konversion()} \n" \
                      f"Nilai Rupiah terhadap Dollar USD : {kr.get_last_day_konversi_rate()}" \
 
-    def kirim_email_outlook(self, user_address_tujuan):
-        with smtplib.SMTP('smtp-relay.sendinblue.com', 587) as connect:
-            connect.starttls()
-            connect.login(user= USERNAME, password= PASSWORD)
-            connect.sendmail(
-                from_addr= USERNAME,
-                to_addrs= user_address_tujuan,
-                msg= self.pesan
-            )
 
     def kirim_email_mailjet(self, user_address_tujuan):
 

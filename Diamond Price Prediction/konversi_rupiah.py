@@ -1,6 +1,6 @@
 import requests
 import datetime
-API_KEY = '9ZNITM0FYYRAIMUF'
+API_KEY = 'YOUR_API_KEY'
 URL_VANTAGE = 'https://www.alphavantage.co/query'
 MINGGU = 6
 SABTU = 5
@@ -62,11 +62,5 @@ class KonversiRupiah:
     def harga_hasil_konversi(self, harga_usd):
 
         return round((self.get_last_day_konversi_rate() * harga_usd), 2)
-
-
-
-
-
-
 
 
