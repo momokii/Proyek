@@ -1,0 +1,162 @@
+{% include "landingpage/headerlp.html" %}
+    
+
+    <!-- ***** Header Area End ***** -->
+
+    <!-- ***** Main Banner Area Start ***** -->
+
+
+
+    <div class="main-banner" id="top">
+
+        <div class="container-fluid col-lg-9">
+            {% if email: %}
+            <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+            <div class="toast show">
+                <div class="toast-header bg-success text-white">
+                  <strong class="me-auto">Notifikasi Kirim Detail Prediksi Berlian</strong>
+                  <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+                </div>
+                <div class="toast-body">
+                  <p>Kirim Detail Prediksi Telah Berhasil!, Terima telah menggunakan layanan ini.</p>
+                  <p>Silahkan Cek Email : {{ email_user }}</p>
+                  <p>Untuk detail dari prediksi yang Anda lakukan.</p>
+
+                </div>
+              </div>
+            </div>
+            {% elif email == False: %}
+            <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+            <div class="toast show">
+                <div class="toast-header bg-danger text-white">
+                  <strong class="me-auto">Notifikasi Kirim Detail Prediksi Berlian</strong>
+                  <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+                </div>
+                <div class="toast-body">
+                  <p>Kirim Detail Prediksi Telah Gagal!</p>
+
+                </div>
+              </div>
+            </div>
+
+
+            {% endif %}
+
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <div class="left-content">
+                        <div class="thumb">
+                            <div class="inner-content">
+                                <h4>Teman Prediksi Berlian Anda!</h4>
+                                <span>Inputkan datanya &amp; dapatkan hasil prediksinya</span>
+                                <div class="main-border-button">
+                                    <a href="{{ url_for('form') }}" target="_blank">Mulai Prediksi!</a>
+                                </div>
+                            </div>
+                            <img src="../static/assetslp/images/diamond4.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="right-content">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="right-first-image">
+                                    <div class="thumb">
+                                        <div class="inner-content">
+                                            <h4>Info Model</h4>
+                                            <span>Bagaimana hasil model yang digunakan?</span>
+                                        </div>
+                                        <div class="hover-content">
+                                            <div class="inner">
+                                                <h4>Info Model</h4>
+                                                <p>Infomasi kualitas dan hasil evaluasi model berdasarkan metrik
+                                                    evaluasi yang
+                                                    digunakan.</p>
+                                                <div class="main-border-button">
+                                                    <a href="{{ url_for('infomodel') }}">Lihat Info Model</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <img src="../static/assetslp/images/diamond5.jpg">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="right-first-image">
+                                    <div class="thumb">
+                                        <div class="inner-content">
+                                            <h4>Our Apps</h4>
+                                            <span>Info website dan orang yang berada di belakang website ini</span>
+                                        </div>
+                                        <div class="hover-content">
+                                            <div class="inner">
+                                                <h4>Our Apps</h4>
+                                                <p>Jika ingin melihat lebih lanjut mengenai apa tujuan pembuatan
+                                                    website ini dan  siapa
+                                                    yang membuat
+                                                    website ini
+                                                    dan mencoba mencari kontaknya, mari lihat profilnya!</p>
+                                                <div class="main-border-button">
+                                                    <a href="{{ url_for('meetteam') }}">Our Webapps</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <img src="../static/assetslp/images/diamond3.jpg">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="right-first-image">
+                                    <div class="thumb">
+                                        <div class="inner-content">
+                                            <h4>Info Variabel</h4>
+                                            <span>Detail Info Mengenai Variabel Input</span>
+                                        </div>
+                                        <div class="hover-content">
+                                            <div class="inner">
+                                                <h4>Info Variabel</h4>
+                                                <p>Jika masih bingung mengenai input yang diberikan, berikut adalah
+                                                    info mengenai variabel input yang digunkana</p>
+                                                <div class="main-border-button">
+                                                    <a href="{{ url_for('infovar') }}" target="_blank">Lihat Info Variabel</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <img src="../static/assetslp/images/diamond2.jpg">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="right-first-image">
+                                    <div class="thumb">
+                                        <div class="inner-content">
+                                            <h4>Kontak Kami</h4>
+                                            <span>Ada Pertanyaa?</span>
+                                        </div>
+                                        <div class="hover-content">
+                                            <div class="inner">
+                                                <h4>Kontak Kami</h4>
+                                                <p>Jika ada pertanyaan mengenai aplikasi ini, kontak kami pada kontak
+                                                    yang tersedia
+                                                    .</p>
+                                                <div class="main-border-button">
+                                                    <a href="{{ url_for('contact') }}" >Hubungi Kami</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <img src="../static/assetslp/images/diamond1.jpg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Main Banner Area End ***** -->
+
+    
+{% include "landingpage/footerlp.html" %}

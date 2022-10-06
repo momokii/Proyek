@@ -1,0 +1,90 @@
+{% include "landingpage/headerlp.html" %}
+    
+
+    <br> <br> <br>
+    <!-- ***** Contact Area Starts ***** -->
+    <div class="contact-us">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div id="map">
+                      <iframe src="https://maps.google.com/maps?q=kalimanah,%20purbalingga&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="400px" frameborder="0" style="border:0" allowfullscreen></iframe>
+                      <!-- You can simply copy and paste "Embed a map" code from Google Maps for any location. -->
+                      
+                    </div>
+                </div>
+
+
+                <div class="col-lg-6">
+                    <div class="section-heading">
+
+                        {% if pesan: %}
+                            <div class="toast show">
+                                <div class="toast-header bg-success text-white">
+                                  <strong class="me-auto">Notifikasi Kirim Feedback!</strong>
+                                  <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+                                </div>
+                                <div class="toast-body">
+                                  <p>Kirim Feedback Telah Berhasil!, Terima kasih atas pesan yang diberikan.</p> <br>
+                                  <h6 class = "text-info">
+                                      <a href="{{ url_for('landingpage') }}" >Kembali ke Halaman Utama</a>
+                                  </h6>
+
+                                </div>
+                              </div>
+                        {% elif pesan == False: %}
+                            <div class="toast show">
+                                <div class="toast-header bg-danger text-white">
+                                  <strong class="me-auto">Notifikasi Kirim Feedback!</strong>
+                                  <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+                                </div>
+                                <div class="toast-body">
+                                  <p>Kirim Feedback Gagal!</p> <br>
+                                  <h6 class = "text-info">
+                                      <a href="{{ url_for('landingpage') }}" >Kembali ke Halaman Utama</a>
+                                  </h6>
+                                </div>
+                              </div>
+                        {% endif %}
+
+                        <h2>Hello, Halo Teman Prediksi </h2>
+                        <span>Jika ada kritik, saran, atau sekadar memberikan pesan kepada kami, bisa ini lewat form di
+                            bawah ini,
+                            Terima Kasih! Kritik dan Saran Teman semua sangat membantu.
+                            .</span>
+                    </div>
+
+                    <form id="contact" action="{{ url_for('contact') }}" method="post" name="kontak">
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <fieldset>
+                              <input name="name" type="text" id="name" placeholder="Your name" required>
+                            </fieldset>
+                          </div>
+                          <div class="col-lg-6">
+                            <fieldset>
+                              <input name="email" type="text" id="email" placeholder="Your email" required>
+                            </fieldset>
+                          </div>
+                          <div class="col-lg-12">
+                            <fieldset>
+                              <textarea name="message" rows="6" id="message" placeholder="Your message" required></textarea>
+                            </fieldset>
+                          </div>
+                          <div class="col-lg-12">
+                            <fieldset>
+                              <button type="submit" id="form-submit" class="main-dark-button"><i class="fa fa-paper-plane"></i></button>
+                            </fieldset>
+                          </div>
+                        </div>
+                      </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Contact Area Ends ***** -->
+
+
+
+    <!-- ***** Footer Start ***** -->
+    {% include "landingpage/footerlp.html" %}

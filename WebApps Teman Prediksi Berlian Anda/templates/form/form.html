@@ -1,0 +1,127 @@
+{% extends "form/header.html" %}
+
+{% block body %}
+
+<div id="booking" class="section">
+		<div class="section-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-7 col-md-push-5">
+						<div class="booking-cta">
+
+
+
+							<h1>Prediksi Berlian Anda</h1>
+							<p>Masukan data berlian Anda, sesuai dengan sesuai dengan kolom yang tersedia, berikan
+								data sesuai yang diminta dan lakukan prediksi dan dapatkan perkiraan harga berlian
+								Anda!.
+							</p>
+						</div>
+					</div>
+					<div class="col-md-4 col-md-pull-7">
+						<div class="booking-form">
+
+							<form method="post" name = 'formPrediksi' action="{{ url_for('prediksiform') }}">
+								<div class="form-group">
+									<span class="form-label">Carat</span>
+									<input class="form-control" type="number" min="0.01" max="2" step = 0.01
+										   placeholder="Masukan nilai carat" name = 'karat' required>
+								</div>
+								<div class="form-group">
+									<div class="form-group">
+											<span class="form-label">Potongan</span>
+											<select class="form-control" name="potongan" required>
+												<option value="" disabled selected hidden>Pilih Potongan</option>
+												<option value="Ideal">Ideal</option>
+												<option value="Premium">Premium</option>
+												<option value="Good">Good</option>
+												<option value="Very Good">Very Good</option>
+												<option value="Fair">Fair</option>
+											</select>
+											<span class="select-arrow"></span>
+										</div>
+								</div>
+
+								<div class="form-group">
+									<div class="form-group">
+											<span class="form-label">Warna</span>
+											<select class="form-control" name="warna" required>
+												<option value="" disabled selected hidden>Pilih Warna</option>
+												<option value="E">E</option>
+												<option value="I">I</option>
+												<option value="J">J</option>
+												<option value="H">H</option>
+												<option value="F">F</option>
+												<option value="G">G</option>
+												<option value="D">D</option>
+											</select>
+											<span class="select-arrow"></span>
+										</div>
+
+
+								</div>
+
+								<div class="form-group">
+									<div class="form-group">
+											<span class="form-label">Clarity</span>
+											<select class="form-control" required name="clarity">
+												<option value="" disabled selected hidden>Pilih Clarity</option>
+												<option value="SI2">SI2</option>
+												<option value="SI1">SI1</option>
+												<option value="VS1">VS1</option>
+												<option value="VS2">VS2</option>
+												<option value="VVS2">VVS2</option>
+												<option value="VVS1">VVS1</option>
+												<option value="I1">I1</option>
+												<option value=IF"">IF</option>
+											</select>
+											<span class="select-arrow"></span>
+										</div>
+
+
+								</div>
+								<div class="row">
+									<div class="col-sm-4">
+										<span class="form-label">Table</span>
+										<input class="form-control" type="number" min="45" max="70" step = 0.01
+										   placeholder="Masukan nilai table" name = 'table' required>
+									</div>
+									<div class="col-sm-4">
+										<span class="form-label">Depth</span>
+										<input class="form-control" type="number" min="50" max="70" step = 0.01
+										   placeholder="Masukan nilai depth" name = 'depth' required>
+									</div>
+									<div class="col-sm-4">
+										<span class="form-label">Volume</span>
+										<input class="form-control" type="number" min="40" max="325" step = 0.01
+										   placeholder="Masukan volume" name = 'volume' required>
+									</div>
+								</div>
+								<br>
+
+								<div>
+									<div class="form-group col-sm-5">
+										<div class="form-btn">
+											<input class="btn btn-primary" value="Prediksi" type="submit" >
+										</div>
+									</div>
+									<div class="form-group col-sm-7">
+										<div class="form-btn">
+											<a class="btn btn-warning" href="{{ url_for('landingpage') }}">Ke Halaman Utama</a>
+										</div>
+									</div>
+								</div>
+
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+{% endblock %}

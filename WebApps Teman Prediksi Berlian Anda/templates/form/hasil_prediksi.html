@@ -1,0 +1,163 @@
+{% extends "form/header.html" %}
+
+{% block body %}
+
+<div id="booking" class="section section-prediksi">
+		<div class="section-center">
+			<br> <br> <br> <br>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-7 col-md-push-5">
+
+						<div class="booking-cta">
+							<h1>Hasil Prediksi Berlian</h1>
+							<p>Data hasil input yang dimasukan oleh user dan berikut di bawahnya adalah hasil
+								prediksi dengan satuan $USD yang didasarkan pada nilai input sudah dimasukan oleh user
+							</p>
+
+
+							<div class="booking-form">
+								<span class="text-center form-label h2"> Hasil Prediksi </span>
+								<hr>
+
+								<div class="row">
+
+									<div class="form-group col-md-6">
+										<span >Prediksi</span> :
+										<span class="form-label h4"> ${{ hasil }}</span>
+									</div>
+
+
+									<div class="form-group col-md-4">
+										<div class="form-btn">
+											<a class="btn btn-warning" href="{{ url_for('landingpage') }}">Ke Halaman Utama</a>
+										</div>
+									</div>
+
+								</div>
+
+
+								<div class="row">
+									<form method="post"
+										  action="{{ url_for('landingpage') }}"
+										  name="detail">
+										<span class="form-label col-sm-6" >
+												Ingin info lengkap? Masukan Email Anda di bawah ini.
+										</span>
+										<div class="col-sm-6">
+
+												<div class="form-group">
+
+												<input  class = "form-control" type="email" name="emailPrediksi" required>
+												</div>
+
+										</div>
+
+
+										<div class="form-group col-sm-6">
+											<div class="form-btn">
+												<input type="submit" class="btn btn-primary" value="Kirim Detail" >
+											</div>
+										</div>
+									</form>
+								</div>
+
+
+
+							</div>
+
+
+
+
+
+
+						</div>
+
+
+
+
+
+					</div>
+
+
+
+
+					<br>
+					<div class="col-md-4 col-md-pull-7">
+
+						<div class="booking-form">
+							<span class="text-center  h2"> Input User </span>
+							<hr>
+
+
+							<form method="post" name = 'formPrediksi' action="{{ url_for('prediksiform') }}">
+
+								<div class="row">
+
+									<div class="col-sm-4 col-lg-12" >
+										<div class="form-group">
+											<span class="form-label">Carat</span> :
+											<span class="form-label h4"> {{ data_prediksi[0] }}</span>
+										</div>
+									</div>
+
+									<div class="col-sm-4 col-lg-12">
+										<div class="form-group">
+											<span class="form-label">Table</span> :
+											<span class="form-label h4"> {{ data_prediksi[5] }}</span>
+										</div>
+									</div>
+
+								</div>
+
+
+								<div class="row">
+
+									<div class="col-sm-4 col-lg-12" >
+										<div class="form-group">
+											<span class="form-label">Depth</span> :
+											<span class="form-label h4"> {{ data_prediksi[4] }}</span>
+										</div>
+									</div>
+
+									<div class="col-sm-4 col-lg-12">
+										<div class="form-group">
+											<span class="form-label">Volume</span> :
+											<span class="form-label h4"> {{ data_prediksi[6] }}</span>
+										</div>
+									</div>
+
+								</div>
+
+
+								<div class="form-group">
+									<span class="form-label">Potongane</span> :
+									<span class="form-label h4"> {{ data_prediksi[1] }}</span>
+								</div>
+
+								<div class="form-group">
+									<span class="form-label">Warna</span> :
+									<span class="form-label h4"> {{ data_prediksi[2] }}</span>
+								</div>
+
+								<div class="form-group">
+									<span class="form-label">Clarity</span> :
+									<span class="form-label h4"> {{ data_prediksi[3] }}</span>
+								</div>
+
+
+							</form>
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,88 @@
+<!-- ***** Footer Start ***** -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="first-item">
+                        <div class="logo">
+                            <img src="../static/assetslp/images/white.png" alt="hexashop ecommerce templatemo">
+                        </div>
+                        <ul>
+                            <li><a href="#">Bawang, Banjarnegara, Jawa Tengah, Indonesia</a></li>
+                            <li><a href="mailto:kelanachandra7@gmail.com">kelanachandra7@gmail.com</a></li>
+                            <li><a href="https://wa.me/+6285727771176"
+                                   target="_blank">(+62) 85-727-771-176</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <h4>Useful Links</h4>
+                    <ul>
+                        <li><a href="{{ url_for('landingpage') }}">Homepage</a></li>
+                        <li><a href="{{ url_for('form') }}">Mulai Prediksi</a></li>
+                        <li><a href="{{ url_for('infovar') }}">Info Variabel</a></li>
+                        <li><a href="{{ url_for('infomodel') }}">Info Model</a></li>
+                        <li><a href="{{ url_for('contact') }}">Kontak Kami</a></li>
+                        <li><a href="{{ url_for('meetteam') }}">Tentang Kami</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="under-footer">
+
+                        <ul>
+                            <li><a href="https://www.instagram.com/kelanach/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://wa.me/+6285727771176"
+                                   target="_blank"><i class="fa fa-whatsapp"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/kelanach/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="https://medium.com/@kelanach" target="_blank"><i class="fa fa-medium"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- jQuery -->
+    <script src="../static/assetslp/js/jquery-2.1.0.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="../static/assetslp/js/popper.js"></script>
+    <script src="../static/assetslp/js/bootstrap.min.js"></script>
+
+    <!-- Plugins -->
+    <script src="../static/assetslp/js/owl-carousel.js"></script>
+    <script src="../static/assetslp/js/accordions.js"></script>
+    <script src="../static/assetslp/js/datepicker.js"></script>
+    <script src="../static/assetslp/js/scrollreveal.min.js"></script>
+    <script src="../static/assetslp/js/waypoints.min.js"></script>
+    <script src="../static/assetslp/js/jquery.counterup.min.js"></script>
+    <script src="../static/assetslp/js/imgfix.min.js"></script>
+    <script src="../static/assetslp/js/slick.js"></script>
+    <script src="../static/assetslp/js/lightbox.js"></script>
+    <script src="../static/assetslp/js/isotope.js"></script>
+
+    <!-- Global Init -->
+    <script src="../static/assetslp/js/custom.js"></script>
+
+    <script>
+
+        $(function() {
+            var selectedClass = "";
+            $("p").click(function(){
+            selectedClass = $(this).attr("data-rel");
+            $("#portfolio").fadeTo(50, 0.1);
+                $("#portfolio div").not("."+selectedClass).fadeOut();
+            setTimeout(function() {
+              $("."+selectedClass).fadeIn();
+              $("#portfolio").fadeTo(50, 1);
+            }, 500);
+
+            });
+        });
+
+    </script>
+
+  </body>
+</html>
