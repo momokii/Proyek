@@ -1,10 +1,10 @@
 from mailjet_rest import Client
-MAIJET_API_KEY = 'fb3bf8be913d33916f010f98a2d19df6'
-MAIJET_SECRET_KEY = '16dfdcd00644e87cbdab87da54c55ee0'
+MAIJET_API_KEY = 'YOUR_MAILJET_API_KEY'
+MAIJET_SECRET_KEY = 'YOUR_MAILJET_SECRET_KEY'
 # https://github.com/mailjet/mailjet-apiv3-python
 
-USERNAME = 'artshutter922@gmail.com'
-PASSWORD = 'HBP2FtVhzMdA8nwm'
+USERNAME = 'YOUR_EMAIL_SENDER'
+PASSWORD = 'YOUR_PASSWORD
 
 class KirimEmail:
     def __init__(self,carts, transaksi, member ):
@@ -37,7 +37,7 @@ class KirimEmail:
                 'Messages': [
                     {
                         "From": {
-                            "Email": "artshutter922@gmail.com",
+                            "Email": "YOUR_EMAIL",
                             "Name": "Detail Transaksi Solim Efac"
                         },
                         "To": [
