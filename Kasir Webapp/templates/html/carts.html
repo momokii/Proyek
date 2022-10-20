@@ -1,0 +1,502 @@
+{% extends "html/base_table_carts.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+
+
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages: %}
+
+                        {% for message in messages %}
+                        <p class="text-success text-center" > {{ message }} </p>
+                        {% endfor %}
+
+                {% endif %}
+            {% endwith %}
+
+
+
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-7 align-self-center">
+                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Pilih Makanan</h4>
+
+                    </div>
+                    <div class="col-5 align-self-center">
+                        <div class="customize-input float-right">
+                            <select class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
+                                <option selected>Aug 19</option>
+                                <option value="1">July 19</option>
+                                <option value="2">Jun 19</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <!-- basic table -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+
+
+
+<!-- ============================ PILIH MAKANAN ============================ -->
+
+
+
+
+                                <div class="table-responsive">
+                                    <form method="post" action="{{ url_for('carts') }}">
+                                    <table id="zero_config"
+                                           class="table table-striped table-bordered no-wrap">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Nama</th>
+                                                <th>Harga</th>
+                                                <th>Diskon</th>
+                                                <th>Jumlah</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                        {% for makanan in all_makanan: %}
+
+                                            <tr>
+                                                <td>{{ makanan.id }}</td>
+                                                <td>{{ makanan.nama_makanan }}</td>
+                                                <td>{{ makanan.harga }}</td>
+                                                <td>{{ makanan.diskon }}%</td>
+                                                <td>
+
+                                                    <div class="form-group">
+                                                        <input type="number" class="form-control"
+                                                               placeholder="Jumlah" min="0" value="0"
+                                                               name="jumlah{{ makanan.id }}" >
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <input type="number" class="form-control"
+                                                               value="jumlah{{ makanan.id }}"
+                                                               name="id{{ makanan.id }}" hidden>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+
+                                        {% endfor %}
+
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Nama</th>
+                                                <th>Harga</th>
+                                                <th>Diskon</th>
+                                                <th>Jumlah</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                    <br>
+                                    <div class="col-lg-12 text-center">
+                                        <button type="submit" class="btn btn-block btn-success">
+                                            {% if carts == [] %}
+                                            Tambahkan Carts
+                                            {% else %}
+                                            Ganti Carts
+                                            {% endif %}
+                                        </button>
+                                    </div>
+                                    <br>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+<!-- ============================ INFO CARTS ============================ -->
+
+
+                <div class="page-breadcrumb">
+                    <div class="row">
+                        <div class="col-7 align-self-center">
+                            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Input Carts</h4>
+                        </div>
+                    </div>
+                </div>
+
+                {% if carts != [] %}
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="table-responsive">
+
+                                    <table id="zero_config1"
+                                           class="table table-striped table-bordered no-wrap">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Nama</th>
+                                                <th>Harga</th>
+                                                <th>Diskon</th>
+                                                <th>Jumlah</th>
+                                                <th>Harga Diskon</th>
+                                                <th>Harga Total</th>
+                                                <th>Tambahan</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                        {% for makanan in carts: %}
+
+                                            <tr>
+                                                <td>{{ makanan.id_makanan }}</td>
+                                                <td>{{ makanan.nama_makanan }}</td>
+                                                <td>{{ makanan.harga }}</td>
+                                                <td>{{ makanan.diskon }}%</td>
+                                                <td>{{ makanan.jumlah }}</td>
+                                                <td>{{ makanan.harga_diskon }}</td>
+                                                <td>{{ makanan.harga_total }}</td>
+                                                <td>
+
+
+
+
+
+                                                    <!-- HAPUS -->
+                                                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                                                            data-target="#makanan{{makanan.id_makanan}}"> Hapus
+                                                    </button>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="makanan{{makanan.id_makanan}}"
+                                                         tabindex="-1"
+                                                         role="dialog" aria-labelledby="exampleModalLabel"
+                                                         aria-hidden="true">
+                                                      <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                          <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Hapus
+                                                                Makanan</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                              <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                          </div>
+                                                          <div class="modal-body">
+                                                            <p>
+                                                                Konfirmasi hapus makanan dari carts <br> {{
+                                                                makanan.nama_makanan
+                                                                }} | {{makanan.jumlah}} ?
+                                                            </p>
+
+                                                          </div>
+                                                          <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-danger">
+                                                                <a
+                                                                        href="{{ url_for('delete_cartsItem', id = makanan.id_pesanan) }}" class="text-white">Hapus</a>
+                                                            </button>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+
+
+
+
+
+                                                    <!-- EDIT -->
+                                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#makananedit{{makanan.id_makanan}}"> Edit
+                                                    </button>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="makananedit{{makanan.id_makanan}}"
+                                                         tabindex="-1"
+                                                         role="dialog" aria-labelledby="exampleModalLabel"
+                                                         aria-hidden="true">
+                                                      <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                          <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel1">Edit
+                                                                Menu</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                              <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                          </div>
+                                                          <div class="modal-body">
+
+
+                                                            <form method="post" action="{{ url_for('edit_cartsItem') }}">
+                                                             <div class="form-group">
+                                                                <input type="text" class="form-control" name="id" placeholder="Nama Makanan" value="{{ makanan.id_pesanan }}"
+                                                                       required hidden>
+                                                              </div>
+                                                              <div class="form-group">
+                                                                <label>Nama Makanan</label>
+                                                                <input type="text" class="form-control" name="nama_makanan" placeholder="Nama Makanan"
+                                                                       value="{{ makanan.nama_makanan }}" readonly>
+                                                              </div>
+                                                              <div class="form-group">
+                                                                <label>Harga</label>
+                                                                <input type="number" class="form-control" name="harga" placeholder="Harga" value="{{ makanan.harga }}" min="0" readonly>
+                                                              </div>
+                                                              <div class="form-group">
+                                                                <label>Diskon</label>
+                                                                <input type="number" class="form-control" name="diskon" placeholder="Diskon" value="{{ makanan.diskon }}" min="0"
+                                                                       max="100" readonly>
+                                                              </div>
+                                                              <div class="form-group">
+                                                                <label>Jumlah</label>
+                                                                <input type="number" class="form-control" name="jumlah" placeholder="Jumlah" value="{{ makanan.jumlah }}" min="0"
+                                                                       required>
+                                                              </div>
+                                                              <button type="submit" class="btn btn-primary">Konfirmasi Edit</button>
+                                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            </form>
+
+
+
+
+
+                                                          </div>
+
+                                                        </div>
+                                                      </div>
+                                                    </div>
+
+
+
+
+
+
+
+                                                </td>
+                                            </tr>
+
+                                        {% endfor %}
+
+                                        </tbody>
+
+                                    </table>
+
+
+
+<!-- ============================ SUMMARY CARTS ============================ -->
+
+
+
+                                </div>
+
+                                    <div class="page-breadcrumb">
+                                        <div class="row">
+                                            <div class="col-7 align-self-center">
+                                                <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Carts Summary</h4>
+                                            </div>
+                                        </div>
+
+                                        <br>
+                                    <form method="post" action="{{ url_for('konfirmasi_bayar') }}">
+                                        <div class="row">
+                                            <div class="col-lg-5">
+
+                                                <table>
+                                                <tr>
+                                                    <td class="font-weight-bold"> Total Jenis Barang   </td>
+                                                    <td> &nbsp;:&nbsp; </td>
+                                                    <td>
+                                                        <input type="number" class="form-control" name="totalJenisBarang" value="{{ summary[0] }}" readonly>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="font-weight-bold"> Total Jumlah Barang   </td>
+                                                    <td> &nbsp;:&nbsp; </td>
+                                                    <td>
+                                                        <input type="number" class="form-control"
+                                                               name="totalJumlahBarang" value="{{ summary[1] }}"
+                                                               readonly>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="font-weight-bold"> Total Harga   </td>
+                                                    <td> &nbsp;:&nbsp; </td>
+                                                    <td>
+                                                        <input type="number" class="form-control" name="totalHarga"
+                                                               value="{{ summary[2] }}" readonly>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="font-weight-bold"> Total Diskon   </td>
+                                                    <td> &nbsp;:&nbsp; </td>
+                                                    <td>
+                                                        <input type="number" class="form-control" name="totalDiskon"
+                                                               value="{{ summary[3] }}" readonly>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="font-weight-bold"> Total Harga Akhir   </td>
+                                                    <td> &nbsp;:&nbsp; </td>
+                                                    <td>
+                                                        <input type="number" class="form-control" name="jumlahHargaAkhir"value="{{ summary[4] }}" readonly>
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                        </div>
+
+                                            <div class="col-lg-7">
+                                                <h4 class="font-weight-bold">Pembayaran</h4>
+
+                                                {% if not member %}
+                                                <button class="btn btn-warning" >
+                                                    <a class="text-dark"
+                                                       href="{{ url_for('member', member= True  ) }}" >
+                                                        Tambah Member
+                                                    </a>
+                                                </button>
+                                                {% endif %}
+
+                                                <br>
+
+
+                                                    <div class="form-group">
+                                                        <label>Jumlah Bayar</label>
+                                                        <input type="number" class="form-control" name="jumlah_bayar" placeholder="Jumlah" value="0" min="0" required>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Jumlah Tagihan</label>
+                                                        <input type="number" class="form-control" name="jumlah_tagihan"
+                                                               placeholder="Jumlah" value="{{ summary[4] }}" readonly>
+                                                    </div>
+
+                                                    {% if member %}
+
+                                                    <div class="form-group">
+                                                        <label>Info Member</label>
+                                                        <p class="font-weight-bold" >
+                                                            {{ member.nama_member }} | {{ member.email }} | {{
+                                                            member.nomor }}
+                                                        </p>
+
+                                                        <button class="btn btn-warning" >
+                                                            <a class="text-dark"
+                                                               href="{{ url_for('member', member= True) }}" >
+                                                                Ganti Member
+                                                            </a>
+                                                        </button>
+
+                                                        <button class="btn btn-danger" >
+                                                            <a class="text-white"
+                                                               href="{{ url_for('carts')  }}" >
+                                                                Hapus Member
+                                                            </a>
+                                                        </button>
+
+                                                        <input type="number" class="form-control" name="member"
+                                                               value="{{ member.id }}" hidden>
+
+                                                        <input type="text" class="form-control" name="memberConfirm" value="{{ True }}" hidden>
+                                                    </div>
+
+                                                    {% else %}
+
+                                                    <input type="text" class="form-control" name="memberConfirm" value="{{ False }}" hidden>
+
+                                                    {% endif %}
+
+
+
+                                                    <hr>
+
+                                                    <input type="submit" class="btn btn-primary" value="Konfirmasi Bayar" >
+
+                                    </form>
+
+                                                    <!-- HAPUS ALL CARTS -->
+                                                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                                                            data-target="#hapusCarts"> Hapus Carts
+                                                    </button>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="hapusCarts"
+                                                         tabindex="-1"
+                                                         role="dialog" aria-labelledby="exampleModalLabel"
+                                                         aria-hidden="true">
+                                                      <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                          <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Hapus
+                                                                Makanan</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                              <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                          </div>
+                                                          <div class="modal-body">
+                                                            <p>
+                                                                Konfirmasi Seluruh Item dari Carts?
+                                                            </p>
+
+                                                          </div>
+                                                          <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-danger">
+                                                                <a href="{{ url_for('delete_allCarts') }}"
+                                                                   class="text-white">Hapus Carts</a>
+                                                            </button>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+
+
+
+
+
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+
+                            </div>
+                        {%else%}
+
+                        {%endif%}
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+{% endblock %}

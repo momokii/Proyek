@@ -1,0 +1,213 @@
+{% extends "html/base_table.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-7 align-self-center">
+                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Makanan</h4>
+
+                    </div>
+                    <div class="col-5 align-self-center">
+                        <div class="customize-input float-right">
+                            <select class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
+                                <option selected>Aug 19</option>
+                                <option value="1">July 19</option>
+                                <option value="2">Jun 19</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <!-- basic table -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <p>
+                                  <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseExample"
+                                          aria-expanded="false"
+                                          aria-controls="collapseExample">
+                                    Tambah Makanan
+                                  </button>
+                                </p>
+                                <div class="collapse" id="collapseExample">
+                                  <div class="card card-body">
+                                    {{ wtf.quick_form(form, novalidate = True, button_map = {"submit" : "primary"},
+                                      extra_classes = "text-danger") }}
+                                  </div>
+                                </div>
+
+
+                                {% with messages = get_flashed_messages() %}
+                                    {% if messages: %}
+
+                                            {% for message in messages %}
+                                            <p class="text-success text-center" > {{ message }} </p>
+                                            {% endfor %}
+
+                                    {% endif %}
+                                {% endwith %}
+
+
+                                <div class="table-responsive">
+                                    <table id="zero_config" class="table table-striped table-bordered no-wrap">
+                                        <thead>
+                                            <tr>
+                                                <th>ID Makanan</th>
+                                                <th>Nama</th>
+                                                <th>Kategori</th>
+                                                <th>Harga</th>
+                                                <th>Diskon</th>
+                                                <th>Tambahan</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                        {% for data in makanan: %}
+                                            <tr>
+                                                <td>{{ data.id }}</td>
+                                                <td>{{ data.nama_makanan }}</td>
+                                                <td>{{ data.kategori }}</td>
+                                                <td>{{ data.harga }}</td>
+                                                <td>{{ data.diskon }}%</td>
+                                                <td>
+
+                                                    <!-- HAPUS -->
+                                                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                                                            data-target="#makanan{{data.id}}"> Hapus </button>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="makanan{{data.id}}" tabindex="-1"
+                                                         role="dialog" aria-labelledby="exampleModalLabel"
+                                                         aria-hidden="true">
+                                                      <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                          <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Hapus
+                                                                Makanan</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                              <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                          </div>
+                                                          <div class="modal-body">
+                                                            <p>
+                                                                Konfirmasi hapus makanan <br> {{ data.nama_makanan }} |
+                                                              {{data.kategori}} | {{ data.harga }}?
+                                                            </p>
+
+                                                          </div>
+                                                          <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-danger">
+                                                                <a
+                                                                        href="{{ url_for('delete_makanan', id = data.id) }}" class="text-white">Hapus</a>
+                                                            </button>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+
+
+
+
+
+                                                    <!-- EDIT -->
+                                                    <button type="button" class="btn btn-warning" data-toggle="modal"
+                                                            data-target="#makananedit{{data.id}}"> Edit </button>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="makananedit{{data.id}}" tabindex="-1"
+                                                         role="dialog" aria-labelledby="exampleModalLabel"
+                                                         aria-hidden="true">
+                                                      <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                          <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel1">Edit
+                                                                Makanan</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                              <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                          </div>
+                                                          <div class="modal-body">
+
+
+                                                            <form method="post" action="{{ url_for('edit_makanan') }}">
+                                                             <div class="form-group">
+                                                                <input type="text" class="form-control" name="id" placeholder="Nama Makanan" value="{{ data.id }}" required hidden>
+                                                              </div>
+                                                              <div class="form-group">
+                                                                <label>Nama Makanan</label>
+                                                                <input type="text" class="form-control" name="nama_makanan" placeholder="Nama Makanan"
+                                                                       value="{{ data.nama_makanan }}" required>
+                                                              </div>
+                                                              <div class="form-group">
+                                                                  <select class="form-control form-select" name="kategori">
+                                                                      {% for data_kategori in kategori: %}
+                                                                          <option value="{{ data_kategori.nama_kategori }}" {% if data.kategori == data_kategori.nama_kategori %} selected {% endif %} >{{ data_kategori.nama_kategori }}</option>
+                                                                      {% endfor %}
+                                                                  </select>
+                                                              </div>
+                                                              <div class="form-group">
+                                                                <label>Harga</label>
+                                                                <input type="number" class="form-control" name="harga" placeholder="Harga" value="{{ data.harga }}" min="0">
+                                                              </div>
+                                                              <div class="form-group">
+                                                                <label>Diskon</label>
+                                                                <input type="number" class="form-control" name="diskon" placeholder="Diskon" value="{{ data.diskon }}" min="0"
+                                                                       max="100">
+                                                              </div>
+                                                              <button type="submit" class="btn btn-primary">Konfirmasi Edit</button>
+                                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            </form>
+
+
+
+
+
+                                                          </div>
+
+                                                        </div>
+                                                      </div>
+                                                    </div>
+
+
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>ID Makanan</th>
+                                                <th>Nama</th>
+                                                <th>Kategori</th>
+                                                <th>Harga</th>
+                                                <th>Diskon</th>
+                                                <th>Tambahan</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+{% endblock %}
