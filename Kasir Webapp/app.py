@@ -14,11 +14,11 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = 'secret-sekali'
+app.config['SECRET_KEY'] = 'YOUR_SECRET_KEY'
 
 Bootstrap(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///kasir.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = "YOUR_DATABASE"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 login_manager = LoginManager()
