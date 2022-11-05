@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+
+
+
+
+
+  <section class="vh-100" style="background-color: #eee;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-lg-9 col-xl-7">
+          <div class="card rounded-3">
+            <div class="card-body p-4">
+
+              <h3 class="text-center my-3 pb-3">Your History ToDoList</h3>
+              <h5 class="text-center my-3 pb-3">Hello {{ current_user.username }}, it's {{ day }}, What are you doing, mate?</h5>
+              <h6 class="text-center my-3 pb-3">Search Your todolist History Here!</h6>
+
+              {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                  {% for message in messages %}
+                    <p class="text-danger text-center" > {{ message }} </p>
+                  {% endfor %}
+                {%  endif %}
+              {% endwith %}
+
+              <hr>
+
+              <div>
+                <button type="button" class="btn btn-primary">
+                  <a href="{{ url_for('main') }}" class="text-white">
+                    Kembali
+                  </a>
+                </button>
+
+
+                <!-- MODAL HISTORY TASK -->
+                <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter1">
+                  Search History
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle1">Cari tanggal histori</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form method="post" action="{{ url_for('history') }}">
+
+                          <label>Pilih tanggal History ToDoList kamu yang ingin ditampilkan</label>
+                          <select name="deadline" id="cars" class="form-control">
+                            <option value="all">Semua</option>
+                            {% for data in all_tanggal %}
+                            <option value="{{ data.tanggal_deadline }}">{{ data.tanggal_deadline }}</option>
+                            {% endfor %}
+                          </select>
+
+
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Cari Histori</button>
+                        </form>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+              </div>
+               <hr>
+
+
+
+              <table class="table mb-4">
+                <thead>
+                  <tr>
+                    <th scope="col">Todo item</th>
+                    <th scope="col">Last Status</th>
+                    <th scope="col">Date deadline</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+
+                  {% for data in history %}
+                  <tr>
+                    <td>{{ data.task }}</td>
+                    <td>{{ data.status }}</td>
+                    <td> {{ data.tanggal_deadline }} </td>
+                    <td>
+                      <button type="submit" class="btn btn-danger">
+                        <a href="{{ url_for('delete_history', id = data.id) }}" class="text-white">
+                          Delete
+                        </a>
+                      </button>
+                    </td>
+                  </tr>
+                  {% endfor %}
+
+
+                </tbody>
+              </table>
+
+
+              <br> <br>
+              <button type="button" class="btn btn-dark">
+                <a href="{{ url_for('logout') }}" class="text-white">
+                  Logout / Keluar
+                </a>
+              </button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

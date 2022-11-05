@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+
+
+
+
+
+  <section class="vh-100" style="background-color: #eee;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-lg-9 col-xl-7">
+          <div class="card rounded-3">
+            <div class="card-body p-4">
+
+              <h3 class="text-center my-3 pb-3">To Do App</h3>
+              <h5 class="text-center my-3 pb-3">Hello {{ current_user.username }}, it's {{ day }}, What are you doing,
+                mate?</h5>
+
+              {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                  {% for message in messages %}
+                    <p class="text-danger text-center" > {{ message }} </p>
+                  {% endfor %}
+                {%  endif %}
+              {% endwith %}
+
+              <hr>
+
+              <div>
+                <!-- MODAL NEW TASK -->
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
+                  New Task
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Tambah Tugas Baru</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form method="post" action="{{ url_for('tambah_task') }}">
+
+                          <label>
+                            Apa yang mau dilakuin?
+                          </label>
+                          <input class="form-control" name = 'task' type="text" placeholder="Masukan Task" required>
+                          <br>
+                          <label>
+                            Mau kapan beri batas akhir ngerjainnya?
+                          </label>
+                          <input class="form-control" type="date" name="date">
+
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Tambahkan Task</button>
+                        </form>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <!-- MODAL HISTORY TASK -->
+                <button type="button" class="btn btn-dark">
+                  <a href="{{ url_for('history') }}" class="text-white">
+                    Lihat History Task
+                  </a>
+
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle1">Tambah Tugas Baru</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form>
+
+                          <input class="form-control" type="text" placeholder="Masukan Task" required>
+                          <br>
+                          <input class="form-control" type="date">
+
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Tambahkan Task</button>
+                        </form>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+              </div>
+               <hr>
+
+              <!-- MODAL HISTORY TASK -->
+                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter2">
+                  Cari ToDoList
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle2">Cari To Do List kamu berdasarkan
+                          tanggal</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form method="post" action="{{ url_for('main') }}">
+                          <label>Pilih Tanggal</label>
+
+                          <select name="deadline" class="form-control">
+                            <option value = "all">Semua</option>
+                            {% for tanggal in all_tanggal %}
+                            {% if tanggal.tanggal_deadline == date %}
+                            <option value="{{ tanggal.tanggal_deadline }}">{{  tanggal.tanggal_deadline}} ( Today
+                              )</option>
+                            {% else %}
+                            <option value="{{ tanggal.tanggal_deadline }}">{{  tanggal.tanggal_deadline}}</option>
+                            {% endif %}
+                            {% endfor %}
+                          </select>
+
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Filter dengan tanggal di atas</button>
+                        </form>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              <table class="table mb-4">
+                <thead>
+                  <tr>
+                    <th scope="col">Todo item</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Date deadline</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  {% for data in taskfilter %}
+                  <tr>
+                    <td>{{ data.task }}</td>
+                    {% if data.status == "Finished" %}
+                    <td ><p class="text-success">{{ data.status }}</p></td>
+                    {% else %}
+                    <td><p class="text-warning">{{ data.status }}</p></td>
+                    {% endif %}
+                    <td>
+                      {% if data.tanggal_deadline == date %}
+                      {{ data.tanggal_deadline }} ( Today )
+                      {% else %}
+                      {{ data.tanggal_deadline }}
+                      {% endif %}
+                    </td>
+                    <td>
+                      <div class="row">
+                      <div class="col-lg-6">
+                        <form method="post" action="{{ url_for('delete_task') }}">
+                        <input type="text" name = "filter" value="{{ data.tanggal_deadline }}" hidden>
+                        <input type="text" name = "id" value="{{ data.id }}" hidden>
+                        <button type="submit" class="btn btn-danger">
+                          Hapus
+                        </button>
+                      </form>
+                      </div>
+
+                      <div class="col-lg-6">
+                      {% if data.status == "Finished" %}
+                      <form method="post" action="{{ url_for('unfinished_task') }}">
+                        <input type="text" name = "filter" value="{{ data.tanggal_deadline }}" hidden>
+                        <input type="text" name = "id" value="{{ data.id }}" hidden>
+                        <button type="submit" class="btn btn-warning">
+                          Unfinish
+                        </button>
+                      </form>
+                      {% else %}
+                      <form method="post" action="{{ url_for('finished_task') }}">
+                        <input type="text" name = "filter" value="{{ data.tanggal_deadline }}" hidden>
+                        <input type="text" name = "id" value="{{ data.id }}" hidden>
+                        <button type="submit" class="btn btn-success">
+                          Finished
+                        </button>
+                      </form>
+                      {% endif %}
+                    </td>
+                    </div>
+                    </div>
+                  </tr>
+                  {% endfor %}
+
+
+
+                </tbody>
+              </table>
+
+              <br> <br>
+              <button type="button" class="btn btn-dark">
+                <a href="{{ url_for('logout') }}" class="text-white">
+                  Logout / Keluar
+                </a>
+              </button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
