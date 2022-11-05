@@ -1,0 +1,108 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %} Judulnya {% endblock %}
+
+
+{% block styles %}
+
+<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+{% endblock %}
+
+
+{% block content %}
+
+
+
+<section class="vh-100" style="background-color: #eee;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-lg-9 col-xl-7">
+          <div class="card rounded-3">
+            <div class="card-body p-4">
+
+              <h3 class="text-center my-3 pb-3">To Do App</h3>
+              <h5 class="text-center my-3 pb-3">Hello , it's {{ day }}, What are you doing,
+                mate?</h5>
+
+              {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                  {% for message in messages %}
+                    <p class="text-danger text-center" > {{ message }} </p>
+                  {% endfor %}
+                {%  endif %}
+              {% endwith %}
+
+              <hr>
+
+              <div>
+                <!-- MODAL NEW TASK -->
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
+                  New Task
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Tambah Tugas Baru</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form method="post" action="">
+
+                          <label>
+                            Apa yang mau dilakuin?
+                          </label>
+                          <input class="form-control" name = 'task' type="text" placeholder="Masukan Task" required>
+                          <br>
+                          <label>
+                            Mau kapan beri batas akhir ngerjainnya?
+                          </label>
+                          <input class="form-control" type="date" name="date">
+
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Tambahkan Task</button>
+                        </form>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+<br> <br> <br> <br> <br> <br><br><br>
+<audio controls>
+  <source src="static/halo300.ogg" type="audio/ogg">
+  <source src="static/halo300.mp3" type="audio/mpeg">
+  <a href="static/halo300.mp3">donlot</a>
+Your browser does not support the audio element.
+</audio>
+
+
+
+
+
+              <br> <br>
+              <button type="button" class="btn btn-dark">
+                <a href="" class="text-white">
+                  Logout / Keluar
+                </a>
+              </button>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+{% endblock %}

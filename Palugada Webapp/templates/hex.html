@@ -1,0 +1,130 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %} Get Most Color from Your Image {% endblock %}
+
+
+{% block styles %}
+
+<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+{% endblock %}
+
+
+{% block content %}
+
+
+
+<section class="vh-100" style="background-color: #eee;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-lg-9 col-xl-7">
+          <div class="card rounded-3">
+            <div class="card-body p-4">
+
+              <h3 class="text-center my-3 pb-3">The Convert WebApp</h3>
+              <h4 class="text-center my-3 pb-3">Search Most Color from your Images</h4>
+
+              {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                  {% for message in messages %}
+                    <p class="text-danger text-center" > {{ message }} </p>
+                  {% endfor %}
+                {%  endif %}
+              {% endwith %}
+
+              <hr>
+
+
+              <div class=" d-flex justify-content-left">
+
+
+                <button type="button" class="btn btn-dark">
+                  <a class="text-white" href="{{ url_for('main') }}">
+                    Main Menu
+                  </a>
+                </button>
+
+              </div>
+
+              <hr>
+
+              {% if konversi == False %}
+              <div class=" d-flex justify-content-center">
+
+
+
+                <form method="post" action="{{ url_for('hexcolor') }}" enctype="multipart/form-data">
+
+                  <label>Insert Your Images Here!</label> <br>
+                  <input name = 'image' class="form-control" type="file" accept="image/png, image/jpg, image/jpeg">
+                  <br>
+                  <label>
+                    How Many List From the most color used will showed?
+                  </label>
+                  <br>
+                  <select class="form-control" name="jumlah_warna">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                  </select>
+
+                  <br>
+
+                  <button type="submit" class=" form-control btn btn-primary">
+                    Submit Images!
+                  </button>
+
+                </form>
+
+
+
+              </div>
+
+              {% else %}
+              <label>
+                <b>Your Images</b>
+              </label>
+              <img src="{{ path_gambar }}" class="img-fluid" alt="Responsive image">
+
+              <br> <br> <br> <br>
+
+              <div class="row">
+
+                <label>
+                <b>Most Color Used</b>
+              </label>
+              <table class="table table-borderless justify-content-center">
+                <thead>
+                  <tr>
+                    <th scope="col">Hex Code</th>
+                    <th scope="col">Color</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  {% for data in list_hex_code %}
+                  <tr>
+                    <td>#{{ data }}</td>
+                    <td><p style="background-color:#{{ data }};">.</p></td>
+                  </tr>
+                  {% endfor %}
+
+                </tbody>
+              </table>
+
+              </div>
+
+              {% endif %}
+
+              <hr>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+{% endblock %}
