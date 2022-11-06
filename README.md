@@ -1,4 +1,4 @@
-<h1 align="center">Hello and Welcome To My Simple Repository</h1>
+<h1 align="center">Hello and Welcome To My Repository</h1>
 
 <p align="center">Kelana Chandra Helyandika</p>
 
