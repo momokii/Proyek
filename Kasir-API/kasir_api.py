@@ -24,7 +24,7 @@ class Kategori(db.Model):
 
 
 class Makanan(db.Model):
-    __tablename = "makanan"
+    __tablename__ = "makanan"
     id_makanan = db.Column(db.Integer, primary_key = True)
     nama_makanan = db.Column(db.String, nullable = False, unique = True)
     harga = db.Column(db.Integer, nullable = False)
