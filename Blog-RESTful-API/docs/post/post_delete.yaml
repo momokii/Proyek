@@ -1,0 +1,40 @@
+Edit post yang sudah ada
+---
+tags:
+  - Post
+
+parameters:
+  - in: header
+    name: Authorization
+    required: true
+    description: Access Token user, berguna untuk cek authorization akses user
+  - name: Data Post
+    description : Data baru yang digunakan untuk gantikan data yang sudah ada pada post dipilih
+    in: body
+    required: required
+    schema:
+      type: object
+      required:
+        - "id"
+      properties:
+        id:
+          type: int
+          example: 2
+          description: ID post yang akan dihapus
+
+
+
+
+responses:
+  200:
+    description: Berhasil Hapus
+
+  404:
+    description: Gagal, post tidak ditemukan
+
+  406:
+    description: Gagal, parameter tidak sesuai
+
+  500:
+    description: Gagal, format data dikirimkan bukan JSON
+

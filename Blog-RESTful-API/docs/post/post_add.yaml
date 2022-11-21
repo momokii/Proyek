@@ -1,0 +1,47 @@
+Tambah data Post Baru
+---
+tags:
+  - Post
+
+parameters:
+  - in: header
+    name: Authorization
+    required: true
+    description: Access Token user, berguna untuk cek authorization akses user
+  - name: Data Post
+    description : Data yang akan diinputkan ke dalam database
+    in: body
+    required: required
+    schema:
+      type: object
+      required:
+        - "title"
+        - "subtitle"
+        - "body"
+      properties:
+        title:
+          type: string
+          example: Cara dapat uang 1 Milya!
+          description: Judul dari post
+
+        subtitle:
+          type: string
+          description: Sub Judul dari post
+          example: Memberi tahu cara ampuh mendapatkan uang 1 Milyar dan langkah - langkahnya
+
+        body:
+          type: string
+          description: Isi utama dari post
+          example: Caranya .... selesai.
+
+
+responses:
+  201:
+    description: Berhasil Input, Tampilkan data yang baru saja diinputkan
+
+  406:
+    description: Gagal, parameter tidak sesuai
+
+  500:
+    description: Gagal, format data dikirimkan bukan JSON
+

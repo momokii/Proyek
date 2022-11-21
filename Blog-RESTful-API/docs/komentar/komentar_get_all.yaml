@@ -1,0 +1,13 @@
+Ambil data semua komentar
+---
+tags:
+  - Komentar
+
+
+
+responses:
+  200:
+    description: JSON Data Semua Komentar
+
+  204:
+    description: Komentar Kosong

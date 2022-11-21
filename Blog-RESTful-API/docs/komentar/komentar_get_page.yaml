@@ -1,0 +1,19 @@
+Ambil data komentar pada data sebuah postingan blog
+---
+tags:
+  - Komentar
+
+parameters:
+  - in: path
+    name: id_post
+    required: required
+    type: int
+    description: "id post yang akan diambil data komentarnya"
+
+
+responses:
+  200:
+    description: JSON Data Makanan
+
+  204:
+    description: ID tidak ditemukan

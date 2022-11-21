@@ -1,0 +1,41 @@
+Hapus data komentar
+---
+tags:
+  - Komentar
+
+parameters:
+  - in: header
+    name: Authorization
+    required: true
+    description: Access Token user yang dimiliki
+  - name: Data Komentar
+    description : Data komentar yang akan dihapus
+    in: body
+    required: required
+    schema:
+      type: object
+      required:
+        - "id"
+      properties:
+        id:
+          type: int
+          example: 1
+          description: ID komentar yang akan dihapus
+
+
+responses:
+  200:
+    description: Berhasil Hapus
+
+  401:
+    description: User yang diberikan tidak punya akses lakukan hapus
+
+  404:
+    description: Komentar tidak ditemukan berdasarkan ID yang diinputkan
+
+  406:
+    description: Gagal, parameter tidak sesuai
+
+  500:
+    description: Gagal, format data dikirimkan bukan JSON
+

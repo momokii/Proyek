@@ -1,0 +1,15 @@
+User ambil Access Token baru menggunakan Refresh Token
+---
+tags:
+  - User
+
+parameters:
+  - in: header
+    name: Authorization
+    required: true
+    description: Refresh Token yang user miliki
+
+responses:
+  200:
+    description: Berhasil dapatkan Access Token
+

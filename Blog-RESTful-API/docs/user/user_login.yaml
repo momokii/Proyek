@@ -1,0 +1,44 @@
+Login User ambil data login
+---
+tags:
+  - User
+
+parameters:
+  - name: Data Username
+    description : Data username yang akan coba diinputkan
+    in: body
+    required: required
+    schema:
+      type: object
+      required:
+        - "username"
+        - "password"
+      properties:
+        username:
+          type: string
+          format: alphanumeric
+          example: "username_pertama"
+          description: Username User
+
+        password:
+          type: string
+          format: password
+          example: "********"
+          description: Password User yang akan login
+
+
+
+
+responses:
+  200:
+    description: Login berhasil, mendapatkan Access Token dan Refresh Token
+
+  401:
+    description: Data Input tidak sesuai
+
+  406:
+    description: Gagal, parameter tidak sesuai
+
+  500:
+    description: Gagal, format data dikirimkan bukan JSON
+

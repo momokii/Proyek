@@ -1,0 +1,55 @@
+Tambah data User baru
+---
+tags:
+  - User
+
+parameters:
+  - name: Data User
+    description : Data user yang akan didaftarkan sebagai user baru
+    in: body
+    required: required
+    schema:
+      type: object
+      required:
+        - "username"
+        - "password"
+        - "email"
+        - "nama"
+      properties:
+        username:
+          type: string
+          format: alphanumeric
+          example: "username_saya"
+          description: Username user yang akan didaftarkan
+
+        password:
+          type: string
+          format: password
+          example: "********"
+          description: Password yang akan didaftarkan
+
+        email:
+          type: string
+          format: email
+          description: Email user yang akan didaftarkan
+          example: "username@gmail.com"
+
+        nama:
+          type: string
+          description: Nama User
+          example: User Pertama
+
+
+responses:
+  201:
+    description: Berhasil daftarkan user baru
+
+  409:
+    description: Gagal, User/ Password sudah digunakan
+
+  406:
+    description: Gagal, parameter tidak sesuai
+
+  500:
+    description: Gagal, format data dikirimkan bukan JSON
+

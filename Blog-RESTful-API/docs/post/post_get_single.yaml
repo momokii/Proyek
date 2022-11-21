@@ -1,0 +1,19 @@
+Ambil Single Post Data
+---
+tags:
+  - Post
+
+parameters:
+  - in: path
+    name: id
+    required: true
+    type: integer
+    description: "ID post yang akan diambil"
+
+
+responses:
+  200:
+    description: JSON Data Post
+
+  404:
+    description: ID tidak ditemukan

@@ -1,0 +1,45 @@
+Edit data user yang sudah ada
+---
+tags:
+  - User
+
+parameters:
+  - in: header
+    name: Authorization
+    required: true
+    description: Access Token user, berguna untuk cek authorization akses user
+  - name: Data User
+    description : Data baru yang digunakan untuk gantikan data user yang lama
+    in: body
+    required: required
+    schema:
+      type: object
+      required:
+        - "email"
+        - "nama"
+      properties:
+        email:
+          type: string
+          format: email
+          description: Email user baru yang akan gantikan email sebelumnya
+          example: "username@gmail.com"
+
+        nama:
+          type: string
+          description: Nama user baru yang akan gantikan nama user sebelumnya
+          example: User Pertama
+
+
+responses:
+  200:
+    description: Berhasil edit akun
+
+  404:
+    description: Gagal, ID dicari tidak ditemukan
+
+  406:
+    description: Gagal, parameter tidak sesuai
+
+  500:
+    description: Gagal, format data dikirimkan bukan JSON
+

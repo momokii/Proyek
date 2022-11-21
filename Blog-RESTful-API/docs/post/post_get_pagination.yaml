@@ -1,0 +1,26 @@
+Ambil Post data dengan pagination
+---
+tags:
+  - Post
+
+parameters:
+  - in: query
+    name: page
+    required: false
+    type: int
+    description: "Halaman ke berapa data yang akan diambil"
+    default: 1
+
+  - in: query
+    name: per_page
+    required: false
+    type: int
+    description: "Satu halaman akan ada berapa data post"
+    default: 5
+
+responses:
+  200:
+    description: JSON Data Post
+
+  204:
+    description: Data Kosong

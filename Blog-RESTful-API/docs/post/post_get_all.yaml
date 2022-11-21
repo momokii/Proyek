@@ -1,0 +1,13 @@
+Ambil data semua Post
+---
+tags:
+  - Post
+
+
+
+responses:
+  200:
+    description: JSON Data Semua User
+
+  204:
+    description: Komentar Kosong

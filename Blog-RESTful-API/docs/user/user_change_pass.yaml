@@ -1,0 +1,49 @@
+Ganti password akun
+---
+tags:
+  - User
+
+parameters:
+  - in: header
+    name: Authorization
+    required: true
+    description: Access Token user yang ingin ganti password, berguna untuk cek authorization akses user
+  - name: Data User
+    description : Data user dan data password baru yang akan gantikan data yang lama
+    in: body
+    required: required
+    schema:
+      type: object
+      required:
+        - "pass_lama"
+        - "pass_baru"
+      properties:
+        pass_lama:
+          type: string
+          format: password
+          example: "********"
+          description: Password lama yang nantinya akan diganti dengan yang baru ( masukan password lama untuk validasi akun )
+
+        pass_baru:
+          type: string
+          format: password
+          description: Password baru yang akan gantikan password yang lama
+          example: "***********"
+
+
+responses:
+  200:
+    description: Berhasil ganti password user
+
+  401:
+    description: Gagal, password lama tidak sesuai
+
+  404:
+    description: Gagal, user dicari tidak ditemukan
+
+  406:
+    description: Gagal, parameter tidak sesuai
+
+  500:
+    description: Gagal, format data dikirimkan bukan JSON
+
